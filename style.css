@@ -16,3 +16,23 @@ body{font-family:-apple-system,Verdana,Helvetica Neue,Microsoft Yahei,Hiragino S
   position: relative;
   top: 99px;
 }
+
+
+/* Footer */
+footer#footer{
+  clear: both;
+  margin-top: 40px;
+  padding: 40px 0;
+  border-top: 1px solid #ddd;
+  color: #666;
+}
+footer#footer p{
+  display: block;
+  font-size: 1em;
+  text-align: center;
+}
+#copyright p{
+    line-height: 12px;
+    font-size: 12px;
+    margin-top: 10px;
+}
