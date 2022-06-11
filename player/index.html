@@ -11,10 +11,11 @@
 
 
     <form name="myform">  
-
-     <input type="text" name="name" placeholder="magnet:" id="nn" />  
-
-     <input type="button" name="button" value="submit" onclick="print()" />  
+        <label>Download from a magnet link: </label>
+        <br/>
+        <input type="text" style="width: 100%;" name="name" placeholder="magnet:" id="nn" value="magnet:?xt=urn:btih:85834703f1fe5b44afb99a29a2b2026259c45b11&dn=SSIS-308&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://open.tracker.cl:1337/announce&tr=udp://9.rarbg.com:2810/announce&tr=http://tracker.openbittorrent.com:80/announce&tr=udp://tracker.openbittorrent.com:6969/announce&tr=udp://opentracker.i2p.rocks:6969/announce&tr=https://opentracker.i2p.rocks:443/announce&tr=udp://www.torrent.eu.org:451/announce&tr=udp://tracker.torrent.eu.org:451/announce&tr=udp://open.stealth.si:80/announce&tr=udp://tracker.tiny-vps.com:6969/announce&tr=udp://ipv4.tracker.harry.lu:80/announce&tr=udp://exodus.desync.com:6969/announce&tr=udp://tracker.moeking.me:6969/announce&tr=udp://tracker.lelux.fi:6969/announce&tr=udp://tracker.edkj.club:6969/announce&tr=udp://tracker.dler.org:6969/announce&tr=udp://explodie.org:6969/announce&tr=udp://bt.oiyo.tk:6969/announce&tr=https://tracker.nanoha.org:443/announce&tr=http://tracker.bt4g.com:2095/announce" />  
+        <br/>
+        <input type="button" name="button" value="Submit" onclick="print()" />  
 
     </form> 
 
@@ -30,14 +31,21 @@
     <script>
         var a
         function print(){  
+        // window.location.reload()
 
-          a=myform.name.value;  
+        a=myform.name.value;  
           // alert(a);  
+        if (window.webtor)  {
+            
+        }
         window.webtor = window.webtor || [];
         window.webtor.push({
 
             id: 'player',
             magnet: a,
+            width: '100%',
+            
+            
             on: function(e) {
                 if (e.name == window.webtor.TORRENT_FETCHED) {
                     console.log('Torrent fetched!', e.data);
@@ -52,7 +60,7 @@
                     srclang: 'en',
                     label: 'test',
                     src: 'https://raw.githubusercontent.com/andreyvit/subtitle-tools/master/sample.srt',
-                    default: true,
+                    default: false,
                 }
             ],
             lang: 'en',
@@ -76,60 +84,6 @@
          
         
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@webtor/embed-sdk-js/dist/index.min.js" charset="utf-8" async></script>  
-
-    <!-- <script src="https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js"></script>
-
-    <script>
-      var client = new WebTorrent()
-
-      client.on('error', function (err) {
-        console.error('ERROR: ' + err.message)
-      })
-
-      document.querySelector('form').addEventListener('submit', function (e) {
-        e.preventDefault() // Prevent page refresh
-
-        var torrentId = document.querySelector('form input[name=torrentId]').value
-        log('Adding ' + torrentId)
-        client.add(torrentId, onTorrent)
-      })
-
-      function onTorrent (torrent) {
-        log('Got torrent metadata!')
-        log(
-          'Torrent info hash: ' + torrent.infoHash + ' ' +
-          '<a href="' + torrent.magnetURI + '" target="_blank">[Magnet URI]</a> ' +
-          '<a href="' + torrent.torrentFileBlobURL + '" target="_blank" download="' + torrent.name + '.torrent">[Download .torrent]</a>'
-        )
-
-        // Print out progress every 5 seconds
-        var interval = setInterval(function () {
-          log('Progress: ' + (torrent.progress * 100).toFixed(1) + '%')
-        }, 5000)
-
-        torrent.on('done', function () {
-          log('Progress: 100%')
-          clearInterval(interval)
-        })
-
-        // Render all files into to the page
-        torrent.files.forEach(function (file) {
-          file.appendTo('.log')
-          log('(Blob URLs only work if the file is loaded from a server. "http//localhost" works. "file://" does not.)')
-          file.getBlobURL(function (err, url) {
-            if (err) return log(err.message)
-            log('File done.')
-            log('<a href="' + url + '">Download full file: ' + file.name + '</a>')
-          })
-        })
-      }
-
-      function log (str) {
-        var p = document.createElement('p')
-        p.innerHTML = str
-        document.querySelector('.log').appendChild(p)
-      }
-    </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@webtor/embed-sdk-js/dist/index.min.js" charset="utf-8" async></script>
   </body>
 </html>
